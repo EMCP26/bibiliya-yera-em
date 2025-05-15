@@ -1,1 +1,58 @@
-
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=0",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
+        "Access-Control-Allow-Headers": "Content-Type"
+      },
+      "continue": true
+    },
+    {
+      "src": "/(.*)",
+      "headers": {
+        "cache-control": "s-maxage=3600",
+        "Access-Control-Allow-Origin": "*"
+      },
+      "continue": true
+    }
+  ],
+  "env": {
+    "POSTGRES_URL": "POSTGRES_URL",
+    "POSTGRES_PRISMA_URL": "POSTGRES_PRISMA_URL",
+    "POSTGRES_URL_NON_POOLING": "POSTGRES_URL_NON_POOLING",
+    "POSTGRES_USER": "POSTGRES_USER",
+    "POSTGRES_HOST": "POSTGRES_HOST",
+    "POSTGRES_PASSWORD": "POSTGRES_PASSWORD",
+    "POSTGRES_DATABASE": "POSTGRES_DATABASE"
+  },
+  "regions": ["iad1"],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    }
+  ]
+}
