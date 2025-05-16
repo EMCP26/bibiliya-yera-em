@@ -1,41 +1,16 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "headers": {
-        "cache-control": "s-maxage=0",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS",
-        "Access-Control-Allow-Headers": "Content-Type"
-      },
-      "continue": true
-    },
-    {
-      "src": "/(.*)",
-      "headers": {
-        "cache-control": "s-maxage=3600",
-        "Access-Control-Allow-Origin": "*"
-      },
-      "continue": true
-    }
-  ],
+  "buildCommand": "next build",
+  "outputDirectory": ".next",
   "env": {
-    "POSTGRES_URL": "POSTGRES_URL",
-    "POSTGRES_PRISMA_URL": "POSTGRES_PRISMA_URL",
-    "POSTGRES_URL_NON_POOLING": "POSTGRES_URL_NON_POOLING",
-    "POSTGRES_USER": "POSTGRES_USER",
-    "POSTGRES_HOST": "POSTGRES_HOST",
-    "POSTGRES_PASSWORD": "POSTGRES_PASSWORD",
-    "POSTGRES_DATABASE": "POSTGRES_DATABASE"
+    "NEXT_PUBLIC_APP_URL": "https://bibiliya-yera.vercel.app",
+    "POSTGRES_URL": "postgresql://neondb_owner:npg_n4vpKkRh9Suy@ep-mute-art-a4gv4u6v-pooler.us-east-1.aws.neon.tech/neondb?sslmode=require",
+    "POSTGRES_URL_NON_POOLING": "postgresql://neondb_owner:npg_n4vpKkRh9Suy@ep-mute-art-a4gv4u6v.us-east-1.aws.neon.tech/neondb?sslmode=require&connection_limit=1",
+    "POSTGRES_USER": "neondb_owner",
+    "POSTGRES_HOST": "ep-mute-art-a4gv4u6v-pooler.us-east-1.aws.neon.tech",
+    "POSTGRES_PASSWORD": "npg_n4vpKkRh9Suy",
+    "POSTGRES_DATABASE": "neondb"
   },
-  "regions": ["iad1"],
   "headers": [
     {
       "source": "/(.*)",
@@ -45,7 +20,7 @@
           "value": "nosniff"
         },
         {
-          "key": "X-Frame-Options",
+          "key": "X-Frame-Options", 
           "value": "DENY"
         },
         {
